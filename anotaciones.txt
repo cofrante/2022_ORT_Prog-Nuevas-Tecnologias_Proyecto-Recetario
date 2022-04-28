@@ -1,0 +1,5 @@
+Prueba de ramas
+
+en model van las clases de la aplicacion entidades
+en views - pantallas. 
+en controllers - son clases especiales que hacen de interaccion entre los modelos y las vistas
