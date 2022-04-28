@@ -1,7 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using Web.Models.Contextos;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<ContextoBase>(options => options.UseSqlite(@"filename=DB/Recetario.db"));
 
 var app = builder.Build();
 
