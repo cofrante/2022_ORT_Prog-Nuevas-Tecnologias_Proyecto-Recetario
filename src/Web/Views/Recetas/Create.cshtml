@@ -1,0 +1,78 @@
+﻿@model Web.Models.Receta
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Opciones = @ViewBag.Ingredientes;
+}
+
+<h1>Create</h1>
+
+<h4>Receta</h4>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <textarea asp-for="Descripcion" class="form-control" ></textarea>
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Buscar Ingrediente</label>
+                <input placeholder="pollo" class="form-control" />
+                <label asp-for="Ingredientes" class="control-label"></label>
+                <span asp-validation-for="Ingredientes" class="text-danger"></span>
+
+                <ul class="list-group">
+                   
+                        @foreach(var ingrediente in Opciones){
+                            <li class="list-group-item">
+                                <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                            @ingrediente.Text
+                            </li>
+                     }
+                </ul>
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Crear Receta" class="btn btn-primary" />
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Crear Ingrediente
+                </button>
+            </div>
+            <!-- Vertically centered modal -->
+            <div class="modal" tabindex="-1" id="exampleModal">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Registrar nuevo Ingrediente</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Escriba el ingrediente.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+                            <button type="button" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
