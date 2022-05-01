@@ -24,7 +24,6 @@ namespace Web.Models.Contextos
             .HasOne(e => e.Receta)
             .WithMany(r => r.Ingredientes)
             .HasForeignKey(o => o.RecetaId);
-
         }
 
     }
