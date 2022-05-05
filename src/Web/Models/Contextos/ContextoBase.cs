@@ -24,6 +24,10 @@ namespace Web.Models.Contextos
             .HasOne(e => e.Receta)
             .WithMany(r => r.Ingredientes)
             .HasForeignKey(o => o.RecetaId);
+
+            modelBuilder.Entity<Usuario>()
+                .HasIndex(u => u.Mail)
+                .IsUnique();
         }
 
     }

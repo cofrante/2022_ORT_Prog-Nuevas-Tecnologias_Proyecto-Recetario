@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+
 using Web.Models;
 using Web.Models.Contextos;
 using Web.Models.Enums;
@@ -45,15 +42,7 @@ namespace Web.Controllers
 
         public IActionResult Create()
         {
-            List<SelectListItem> lst = new List<SelectListItem>();
-
-            foreach (PerfilesUsuario perfil in Enum.GetValues(typeof(PerfilesUsuario)))
-            {
-                lst.Add(new SelectListItem() { Text = perfil.ToString(), Value = perfil.ToString() });
-            }
-
-            ViewBag.Opciones = lst;
-
+            ViewData["Perfiles"] = new SelectList(Enum.GetValues(typeof(PerfilesUsuario)));
             return View();
         }
 
@@ -86,15 +75,7 @@ namespace Web.Controllers
                 return NotFound();
             }
 
-            List<SelectListItem> lst = new List<SelectListItem>();
-
-            foreach (PerfilesUsuario perfil in Enum.GetValues(typeof(PerfilesUsuario)))
-            {
-                lst.Add(new SelectListItem() { Text = perfil.ToString(), Value = perfil.ToString() });
-            }
-
-            ViewBag.Opciones = lst;
-
+            ViewData["Perfiles"] = new SelectList(Enum.GetValues(typeof(PerfilesUsuario)));
             return View(usuario);
         }
 
