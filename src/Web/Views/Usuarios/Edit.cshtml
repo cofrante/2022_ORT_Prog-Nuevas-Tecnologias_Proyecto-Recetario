@@ -3,7 +3,6 @@
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var Opciones = @ViewBag.Opciones;
 }
 
 <h1>Edit</h1>
@@ -32,7 +31,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Perfil" class="control-label"></label>
-                @Html.DropDownListFor(x => x.Perfil, (IEnumerable<SelectListItem>) Opciones)
+                <select asp-for="Perfil" class="form-select" asp-items="ViewBag.Perfiles"></select>
                 <span asp-validation-for="Perfil" class="text-danger"></span>
             </div>
             <div class="form-group">

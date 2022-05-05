@@ -1,0 +1,53 @@
+﻿@model Web.Models.UsuarioLogin
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Web.styles.css" asp-append-version="true" />
+
+    <style>
+        main {
+            max-width: 500px !important;
+            height: 100vh !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <main class="container-sm">
+        <div>
+            <h1>Recetario</h1>
+            <h4>Identificarse</h4>
+        </div>
+
+        <form asp-action="Login">
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label">Email</label>
+                <input asp-for="Email" class="form-control" type="email" placeholder="email@example.com"/>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Clave" class="form-label">Contraseña</label>
+                <input asp-for="Clave" class="form-control" type="password" placeholder="Password"/>
+                <span asp-validation-for="Clave" class="text-danger"></span>
+            </div>
+            <button type="submit" value="Login" class="btn btn-primary">Ingresar</button>
+        </form>
+    </main>
+
+    <script>
+        
+    </script>
+</body>
+</html>

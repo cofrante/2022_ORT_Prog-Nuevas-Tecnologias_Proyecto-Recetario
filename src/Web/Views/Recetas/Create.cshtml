@@ -28,6 +28,7 @@
                 <label class="control-label">Buscar Ingrediente</label>
                 <input placeholder="pollo" class="form-control" />
                 <label asp-for="Ingredientes" class="control-label"></label>
+                <select asp-for="Ingredientes" class="form-control" asp-items="ViewBag.Ingredientes"></select>
                 <span asp-validation-for="Ingredientes" class="text-danger"></span>
 
                 <ul class="list-group">

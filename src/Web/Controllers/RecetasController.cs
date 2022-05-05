@@ -47,19 +47,21 @@ namespace Web.Controllers
         // GET: Recetas/Create
         public async Task<IActionResult> Create()
         {
-            List<SelectListItem> lst = new List<SelectListItem>();
+            //List<SelectListItem> lst = new List<SelectListItem>();
 
-            var Ingredientes = await _context.Ingredientes
-                .AsNoTracking()
-                .Take(10)
-                .ToListAsync();
+            //var Ingredientes = await _context.Ingredientes
+            //    .AsNoTracking()
+            //    .Take(10)
+            //    .ToListAsync();
 
-            foreach (Ingrediente ingrediente in Ingredientes)
-            {
-                lst.Add(new SelectListItem() { Text = ingrediente.Descripcion , Value = ingrediente.Id.ToString() });
-            }
+            //foreach (Ingrediente ingrediente in Ingredientes)
+            //{
+            //    lst.Add(new SelectListItem() { Text = ingrediente.Descripcion , Value = ingrediente.Id.ToString() });
+            //}
 
-            ViewBag.Ingredientes = lst;
+            //ViewBag.Ingredientes = lst;
+
+            ViewData["Ingredientes"] = new SelectList(_context.Ingredientes, "Id", "Descripcion");
 
             return View();
         }
