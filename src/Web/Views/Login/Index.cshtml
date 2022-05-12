@@ -76,12 +76,43 @@
                     <input asp-for="Clave" class="form-control" type="password" placeholder="password"/>
                     <span asp-validation-for="Clave" class="text-danger"></span>
                 </div>
+                 No tenes cuenta?
+                 <a asp-action="CreateUser">Registrate!</a>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="submit" class="btn btn-secondary">
-                    <i class="bi bi-box-arrow-in-right"></i>
-                    Ingresar
+                <i class="bi bi-box-arrow-in-right"></i>
+                Ingresar
                 </button>
-            </form>
+                </div>
+               
+
+                <div class="form-group">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Crear Ingrediente
+                </button>
+            </div>
+            <!-- Vertically centered modal -->
+            <div class="modal" tabindex="-1" id="exampleModal">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Registrar nuevo Ingrediente</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Escriba el ingrediente.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+                            <button type="button" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </form>
         </div>
+
     </main>
 </body>
 </html>

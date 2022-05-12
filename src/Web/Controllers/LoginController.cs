@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 
 using Web.Models;
 using Web.Models.Contextos;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Web.Models.Enums;
 
 namespace Web.Controllers
 {
@@ -21,6 +23,12 @@ namespace Web.Controllers
 
         [HttpGet]
         public async Task<IActionResult> Index()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CreateUser()
         {
             return View();
         }
