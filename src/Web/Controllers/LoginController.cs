@@ -38,7 +38,7 @@ namespace Web.Controllers
             return RedirectToAction("Index", "Login");
         }
 
-        [HttpPost]
+        [HttpPost("{controller}")]
         public async Task<IActionResult> Login([Bind("Email,Clave")] UsuarioLogin request)
         {
             if (ModelState.IsValid)
@@ -47,7 +47,7 @@ namespace Web.Controllers
                     .FirstOrDefaultAsync(u => u.Mail == request.Email && u.Clave == request.Clave);
 
                 if (usuario is null)
-                    return View();
+                    return View("Index", request);
 
                 await SignIn(usuario);
 
