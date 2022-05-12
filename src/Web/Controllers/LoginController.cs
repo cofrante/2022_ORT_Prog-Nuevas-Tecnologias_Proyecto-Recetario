@@ -1,5 +1,8 @@
 ﻿#nullable disable
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 using Web.Models;
@@ -22,6 +25,19 @@ namespace Web.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> NoAutorizado()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Index", "Login");
+        }
+
         [HttpPost]
         public async Task<IActionResult> Login([Bind("Email,Clave")] UsuarioLogin request)
         {
@@ -32,9 +48,27 @@ namespace Web.Controllers
 
                 if (usuario is null)
                     return View();
+
+                await SignIn(usuario);
+
+                return RedirectToAction("Index", "Home");
             }
 
-            return RedirectToAction("Index", "Home");
+            return View("Index", request);
+        }
+
+        private async Task SignIn(Usuario usuario)
+        {
+            var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            identity.AddClaim(new Claim(ClaimTypes.Name, usuario.Name));
+            identity.AddClaim(new Claim(ClaimTypes.Role, usuario.Perfil.ToString()));
+            identity.AddClaim(new Claim(ClaimTypes.Email, usuario.Mail));
+            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()));
+
+            var principal = new ClaimsPrincipal(identity);
+
+            await HttpContext.SignInAsync(principal);
         }
     }
 }
