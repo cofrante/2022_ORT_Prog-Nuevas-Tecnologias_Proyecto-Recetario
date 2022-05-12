@@ -20,7 +20,7 @@ namespace Web.Models
         public string Clave { get; set; }
 
         [Required]
-        public PerfilesUsuario Perfil { get; set; }
+        public PerfilesUsuario Perfil { get; set; } = PerfilesUsuario.Usuario;
 
         [Required]
         public DateTime FechaCreacion { get; set; }

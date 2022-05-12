@@ -50,6 +50,7 @@ namespace Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<IActionResult> Create([Bind("Id,Name,Mail,Clave,Perfil")] Usuario usuario)
         {
             if (ModelState.IsValid)

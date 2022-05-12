@@ -1,6 +1,7 @@
-﻿@model Web.Models.UsuarioLogin
+﻿@model Web.Models.Usuario
 
 @{
+    ViewData["Title"] = "Create";
     Layout = null;
 }
 <!DOCTYPE html>
@@ -14,13 +15,11 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Web.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-
-
-    <style>
+        <style>
         body {
             height: 100vh;
             width: 100vw;
-            background-image: url(fondo-login.jpg);
+            background-image: url("~/fondo-login.jpg");
             background-size: cover;
             margin: 0;
         }
@@ -55,45 +54,44 @@
             background: rgba(255, 255, 255, 0.5);
         }
 
-
     </style>
 </head>
 <body>
+   <main class="container-sm">
+<h1>Crear nuevo usuario</h1>
 
-    <main class="container-sm">
-        <div class="div-glass">
+<h4>Usuario</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Usuarios" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mail" class="control-label"></label>
+                <input asp-for="Mail" class="form-control" />
+                <span asp-validation-for="Mail" class="text-danger"></span>
+            </div>
+             <div class="mb-3">
+                <label asp-for="Clave" class="control-label"></label>
+                <input asp-for="Clave" class="form-control" />
+                <span asp-validation-for="Clave" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
             <div>
-                <h1>Recetario</h1>
-                <h4>Identificarse</h4>
+                 <a asp-action="Index" class="btn btn-secondary">Volver</a>
             </div>
+        </form>
+    </div>
+</div>
+</main>
 
-            <form asp-controller="Login" asp-action="Login">
-                <div class="mb-3">
-                    <label asp-for="Email" class="form-label">Email</label>
-                    <input asp-for="Email" class="form-control" type="email" placeholder="email@example.com"/>
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="Clave" class="form-label">Contraseña</label>
-                    <input asp-for="Clave" class="form-control" type="password" placeholder="password"/>
-                    <span asp-validation-for="Clave" class="text-danger"></span>
-                </div>
-                 No tenes cuenta?
-                 <a asp-action="CreateUser">Registrate!</a>
-
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button type="submit" class="btn btn-secondary">
-                <i class="bi bi-box-arrow-in-right"></i>
-                Ingresar
-                </button>
-                </div>
-          </form>
-            </div>
-
-
-    </main>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
 </body>
+
 </html>
