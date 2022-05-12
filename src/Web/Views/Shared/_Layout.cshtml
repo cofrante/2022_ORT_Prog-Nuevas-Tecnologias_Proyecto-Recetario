@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 </head>
 <body>
     <header>
@@ -34,7 +35,12 @@
                     </ul>
                     <ul class="navbar-nav flex-grow-1 justify-content-end">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Index">Cerrar sesión</a>
+                            <form asp-controller="Login" asp-action="Logout">
+                                <button type="submit" class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-box-arrow-in-left"></i>
+                                    Cerrar sesión
+                                </button>
+                            </form>
                         </li>
                     </ul>
                 </div>
