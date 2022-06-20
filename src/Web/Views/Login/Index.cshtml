@@ -20,12 +20,13 @@
         body {
             height: 100vh;
             width: 100vw;
-            background-image: url(fondo-login.jpg);
+            background-image: url(background.jpeg);
             background-size: cover;
             margin: 0;
         }
 
         main {
+            color: aliceblue;
             max-width: 500px !important;
             height: 100vh !important;
             display: flex !important;
@@ -41,6 +42,18 @@
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
             border: 1px solid rgba(99, 99, 99, 0.3);
+        }
+
+        .title{
+            display: flex;
+            flex-direction: column;
+            align-items:center;
+            padding-bottom: 2em;
+        }
+
+        .image{
+            width: 100px;
+            height: 100px;
         }
 
         .input-glass {
@@ -62,7 +75,8 @@
 
     <main class="container-sm">
         <div class="div-glass">
-            <div>
+            <div class="title">
+                <img class="image" src="~/chef2.png"/>
                 <h1>Recetario</h1>
                 <h4>Identificarse</h4>
             </div>
@@ -82,10 +96,10 @@
                  <a asp-action="CreateUser">Registrate!</a>
 
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button type="submit" class="btn btn-secondary">
-                <i class="bi bi-box-arrow-in-right"></i>
-                Ingresar
-                </button>
+                    <button type="submit" class="btn btn-secondary">
+                    <i class="bi bi-box-arrow-in-right"></i>
+                        Ingresar
+                    </button>
                 </div>
           </form>
             </div>
