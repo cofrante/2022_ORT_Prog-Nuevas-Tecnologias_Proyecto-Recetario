@@ -1,4 +1,10 @@
-﻿@model Web.Models.Receta
+﻿<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.js"></script>
+
+@model Web.Models.Receta
 
 @{
     ViewData["Title"] = "Create";
@@ -24,7 +30,7 @@
                 <textarea asp-for="Descripcion" class="form-control" ></textarea>
                 <span asp-validation-for="Descripcion" class="text-danger"></span>
             </div>
-            <div class="form-group">
+           @* <div class="form-group">
                 <label class="control-label">Buscar Ingrediente</label>
                 <input placeholder="pollo" class="form-control" />
                 <label asp-for="Ingredientes" class="control-label"></label>
@@ -40,7 +46,23 @@
                             </li>
                      }
                 </ul>
+            </div>*@
+             <br> 
+             
+            <div>
+                <select class="selectpicker show-menu-arrow" 
+                        data-style="form-control" 
+                        data-live-search="true" 
+                        title="-- Ingredientes --"
+                        multiple="multiple"
+                        asp-items="ViewBag.Ingredientes" id="ingredientes" name="ingredientes">
+                 </select>
+                 @*<button type="button" class="btn btn-primary">Agregar</button>*@
+                    @*<a onclick= "buscarReceta()" class="btn btn-primary" > Buscar</a>*@
+                   @* <input type="submit" value="Buscar" class="btn btn-primary" />*@
             </div>
+             <br> 
+              <br> 
             <div class="form-group">
                 <input type="submit" value="Crear Receta" class="btn btn-primary" />
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">

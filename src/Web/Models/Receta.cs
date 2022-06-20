@@ -10,11 +10,9 @@ namespace Web.Models
         [Required]
         public string Descripcion { get; set; }
 
-
         public List<IngredienteReceta> Ingredientes { get; set; }= new List<IngredienteReceta>();
 
-        [Required]
-        public string Usuario { get; set; } = "Franco";
+        public string Usuario { get; set; } = String.Empty;
 
         [Required]
         public DateTime FechaAlta { get; set; }

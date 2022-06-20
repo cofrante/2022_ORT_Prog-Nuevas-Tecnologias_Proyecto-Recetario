@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 using Web.Models;
 using Web.Models.Contextos;
@@ -50,8 +51,10 @@ namespace Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Descripcion,Usuario,FechaAlta,FechaEdicion,Puntaje")] Receta receta)
+        public async Task<IActionResult> Create([Bind("Id,Nombre,Descripcion,FechaAlta,FechaEdicion,Puntaje")] Receta receta)
         {
+            receta.Usuario = User.FindFirstValue(ClaimTypes.Name);
+            
             if (ModelState.IsValid)
             {
                 receta.FechaAlta = DateTime.Now;
