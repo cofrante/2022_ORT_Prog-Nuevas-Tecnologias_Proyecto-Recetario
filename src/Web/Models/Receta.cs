@@ -15,9 +15,11 @@ namespace Web.Models
         public string Usuario { get; set; } = String.Empty;
 
         [Required]
+        [DisplayAttribute(Name = "Fecha de Creación")]
         public DateTime FechaAlta { get; set; }
 
         [Required]
+        [DisplayAttribute(Name = "Fecha de Edición")]
         public DateTime FechaEdicion { get; set; } = DateTime.MinValue;
 
         [Range(0,5)]

@@ -1,15 +1,22 @@
 ﻿@model Web.Models.Receta
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles";
+    ViewData["Subtitle"] = "Ver información de la receta";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<div class="listTitle">
+    <div>
+        <h1>@ViewBag.Title</h1>
+        <h6 class="text-secondary">@ViewBag.Subtitle</h6>
+    </div>
+    <div>
+        <a class="btn btn-outline-secondary" asp-action="Index"><i class="bi bi-arrow-left-circle"></i></a>
+    </div>
+</div>
 
 <div>
-    <h4>Receta</h4>
-    <hr />
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Nombre)
@@ -48,8 +55,4 @@
             @Html.DisplayFor(model => model.Puntaje)
         </dd>
     </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
 </div>

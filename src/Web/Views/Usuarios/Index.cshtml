@@ -18,7 +18,7 @@
 </div>
 
 
-<table class="listTable asd">
+<table class="listTable">
     <thead>
         <tr>
             <th>
@@ -51,7 +51,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.FechaCreacion)
             </td>
-            <td>
+            <td class="text-end">
                 <a class="btn btn-outline-secondary" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pen"></i></a>
                 <a class="btn btn-outline-secondary" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i></a>
                 <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>

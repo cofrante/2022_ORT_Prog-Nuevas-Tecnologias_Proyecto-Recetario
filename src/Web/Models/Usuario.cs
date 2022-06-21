@@ -23,6 +23,7 @@ namespace Web.Models
         public PerfilesUsuario Perfil { get; set; } = PerfilesUsuario.Usuario;
 
         [Required]
+        [DisplayAttribute(Name = "Fecha de Creación")]
         public DateTime FechaCreacion { get; set; }
     }
 }

@@ -73,10 +73,13 @@ namespace Web.Controllers
             }
 
             var receta = await _context.Recetas.FindAsync(id);
+
             if (receta == null)
             {
                 return NotFound();
             }
+
+            ViewData["Ingredientes"] = new SelectList(_context.Ingredientes, "Id", "Descripcion");
             return View(receta);
         }
 
