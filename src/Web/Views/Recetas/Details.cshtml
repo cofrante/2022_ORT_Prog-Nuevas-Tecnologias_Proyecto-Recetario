@@ -52,7 +52,40 @@
             @Html.DisplayNameFor(model => model.Puntaje)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Puntaje)
+            <div class="ui large star rating" data-rating="@Html.DisplayFor(model => model.Puntaje)" data-max-rating="5"></div>
         </dd>
     </dl>
+
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Ingrediente
+                </th>
+                <th>
+                    Cantidad
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Ingredientes)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ingrediente.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cantidad)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
+
+@section Scripts {
+    <script>
+        $('.ui.rating').rating('disable');
+    </script>
+}

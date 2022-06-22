@@ -13,12 +13,12 @@
         <h6 class="text-secondary">@ViewBag.Subtitle</h6>
     </div>
     <div>
-        <a class="btn btn-primary" asp-action="Create">Nuevo</a>
+        <a class="btn btn-primary shadow-sm" asp-action="Create">Nuevo</a>
     </div>
 </div>
 
 
-<table class="listTable">
+<table class="shadow-sm">
     <thead>
         <tr>
             <th>
@@ -52,9 +52,9 @@
                 @Html.DisplayFor(modelItem => item.FechaCreacion)
             </td>
             <td class="text-end">
-                <a class="btn btn-outline-secondary" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pen"></i></a>
-                <a class="btn btn-outline-secondary" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i></a>
-                <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>
+                <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pen"></i></a>
+                <a class="btn btn-sm btn-outline-secondary" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i></a>
+                <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>
             </td>
         </tr>
     }

@@ -20,16 +20,16 @@
         <select
             multiple
             size="10"
-            asp-items="ViewBag.Ingredientes" 
-            name="ingredientes" 
-            id="ingredientes" 
-            class="form-select" >
-        </select>    
+            id="ingredientes"
+            class="form-select"
+            name="ingredientes"
+            asp-items="ViewBag.Ingredientes" >
+        </select>
     </div>
 </form>
 <br />
 <div>
-    <table class="table">
+    <table>
     <thead>
         <tr>
             <th>
@@ -41,26 +41,47 @@
             <th>
                 @Html.DisplayNameFor(model => model.Puntaje)
             </th>
-            <th> </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model) {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Descripcion)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Puntaje)
-                    </td>
-                    <td>
-                        <a class="btn btn-outline-secondary" asp-controller="Recetas" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i></a>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    <div class="ui large star rating" data-id="@item.Id" data-rating="@item.Puntaje" data-max-rating="5"></div>
+                </td>
+                <td>
+                    <a class="btn btn-outline-secondary" asp-controller="Recetas" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i></a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
 </div>
+
+@section Scripts {
+    <script>
+        $('.ui.rating').rating('setting', 'onRate', function(value) {
+            var request = { 
+                recetaId: $(this).data('id'),
+                puntaje: value,
+            }
+
+            $.post("/Recetas/Puntaje", request, function (data) {})
+                .done(function () {
+                    location.reload();
+                })
+                .fail(function () {
+                    alert("error");
+                })
+                .always(function () {
+                }); 
+        });
+    </script>
+}

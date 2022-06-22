@@ -8,6 +8,6 @@ namespace Web.Models
         [Required]
         public string Descripcion { get; set; }
 
-        public List<IngredienteReceta> Recetas { get; set; }
+        public List<IngredienteReceta> Recetas { get; set; } = new List<IngredienteReceta>();
     }
 }

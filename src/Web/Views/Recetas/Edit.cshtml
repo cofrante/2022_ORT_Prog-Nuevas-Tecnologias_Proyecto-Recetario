@@ -6,20 +6,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <form asp-action="Edit">
-<div class="listTitle">
-    <div>
-        <h1>@ViewBag.Title</h1>
-        <h6 class="text-secondary">@ViewBag.Subtitle</h6>
+    <div class="listTitle">
+        <div>
+            <h1>@ViewBag.Title</h1>
+            <h6 class="text-secondary">@ViewBag.Subtitle</h6>
+        </div>
+        <div>
+            <a class="btn btn-outline-secondary" asp-action="Index"><i class="bi bi-arrow-left-circle"></i></a>
+            <input type="submit" value="Guardar" class="btn btn-primary" />
+        </div>
     </div>
-    <div>
-        <a class="btn btn-outline-secondary" asp-action="Index"><i class="bi bi-arrow-left-circle"></i></a>
-        <input type="submit" value="Guardar" class="btn btn-primary" />
-    </div>
-</div>
 
-<div class="row">
-    <div class="col-md-8">
-        
+    <div class="row">
+        <div class="col-md">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -29,23 +28,115 @@
             </div>
             <div class="form-group">
                 <label asp-for="Descripcion" class="control-label"></label>
-                <textarea asp-for="Descripcion" class="form-control"></textarea>
+                <textarea asp-for="Descripcion" class="form-control" rows="7"></textarea>
                 <span asp-validation-for="Descripcion" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Ingredientes" class="control-label"></label>
-                <select
-                    multiple
-                    size="10"
-                    asp-items="ViewBag.Ingredientes" 
-                    name="ingredientes" 
-                    id="ingredientes" 
-                    class="form-select" >
-                </select>
+        </div>
+    </div>
+</form>
+
+<br />
+<div class="row">
+    <div class="col-md-8">
+        <div class="form-group">
+            <label class="control-label">Agregar ingrediente</label>
+            <div class="row">
+                <div class="col-md-8">
+                    <select id="select_ingrediente" class="form-select" asp-items="ViewBag.Ingredientes" ></select>
+                    <span asp-validation-for="Ingredientes" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <input id="input_cantidad" value="1" class="form-control" placeholder="Cantidad"/>
+                </div>
+                <div class="col-md-2">
+                    <button onclick="CrearRecetaIngrediente()" class="btn btn-outline-primary">Agregar</button>
+                </div>
+
             </div>
+        </div>
+
+        <br />
+
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Ingrediente
+                    </th>
+                    <th>
+                        Cantidad
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Ingredientes)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ingrediente.Descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cantidad)
+                        </td>
+                        <td class="text-end">
+                            <button onclick="BorrarIngredienteReceta(@item.IngredienteId)" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
-</form>
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        function CrearRecetaIngrediente() {
+            var recetaId = document.getElementById('Id').value;
+            var ingredienteId = document.getElementById('select_ingrediente').value;
+            var cantidad = document.getElementById('input_cantidad').value;
+            
+            var request = { 
+                recetaId: recetaId, 
+                ingredienteId: ingredienteId, 
+                cantidad: cantidad || 1,
+            }
+
+            console.log(request);
+
+            $.post("/Recetas/AgregarIngredienteReceta", request,function (data) {})
+                .done(function () {
+                    location.reload();
+                })
+                .fail(function () {
+                    alert("error");
+                })
+                .always(function () {
+                    
+                });
+        }
+
+        function BorrarIngredienteReceta(ingredienteId){
+            var recetaId = document.getElementById("Id").value;
+
+            var request = { 
+                recetaId: recetaId, 
+                ingredienteId: ingredienteId, 
+            }
+
+            $.post("/Ingredientes/BorrarIngredienteReceta", request,function (data) {})
+                .done(function () {
+                    location.reload();
+                })
+                .fail(function () {
+                    alert("error");
+                })
+                .always(function () {
+                    
+                });
+        }
+    </script>
+
 }

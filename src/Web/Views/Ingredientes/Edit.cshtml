@@ -1,0 +1,35 @@
+﻿@model Web.Models.Ingrediente
+
+@{
+    ViewData["Title"] = "Editar";
+    ViewData["Subtitle"] = "Modificar información del ingrediente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form asp-action="Edit">
+    <div class="listTitle">
+        <div>
+            <h1>@ViewBag.Title</h1>
+            <h6 class="text-secondary">@ViewBag.Subtitle</h6>
+        </div>
+        <div>
+            <a class="btn btn-outline-secondary" asp-action="Index"><i class="bi bi-arrow-left-circle"></i></a>
+            <input type="submit" value="Guardar" class="btn btn-primary" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Descripcion" class="control-label"></label>
+                    <input asp-for="Descripcion" class="form-control" />
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

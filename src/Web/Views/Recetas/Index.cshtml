@@ -16,7 +16,7 @@
     </div>
 </div>
 
-<table class="listTable">
+<table>
     <thead>
         <tr>
             <th>
@@ -59,14 +59,20 @@
                 @Html.DisplayFor(modelItem => item.FechaEdicion)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Puntaje)
+                <div class="ui large star rating" data-rating="@Html.DisplayFor(modelItem => item.Puntaje)" data-max-rating="5"></div>
             </td>
             <td>
-                <a class="btn btn-outline-secondary" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pen"></i></a>
-                <a class="btn btn-outline-secondary" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i></a>
-                <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>
+                <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pen"></i></a>
+                <a class="btn btn-sm btn-outline-secondary" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i></a>
+                <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+@section Scripts {
+    <script>
+        $('.ui.rating').rating('disable');
+    </script>
+}

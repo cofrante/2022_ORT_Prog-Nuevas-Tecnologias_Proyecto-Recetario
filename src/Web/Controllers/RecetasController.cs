@@ -33,7 +33,10 @@ namespace Web.Controllers
             }
 
             var receta = await _context.Recetas
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .Include(x => x.Ingredientes)
+                    .ThenInclude(x => x.Ingrediente)
+                .FirstOrDefaultAsync(x => x.Id == id);
+
             if (receta == null)
             {
                 return NotFound();
@@ -44,8 +47,6 @@ namespace Web.Controllers
 
         public async Task<IActionResult> Create()
         {
-            ViewData["Ingredientes"] = new SelectList(_context.Ingredientes, "Id", "Descripcion");
-
             return View();
         }
 
@@ -72,7 +73,10 @@ namespace Web.Controllers
                 return NotFound();
             }
 
-            var receta = await _context.Recetas.FindAsync(id);
+            var receta = await _context.Recetas
+                .Include(x => x.Ingredientes)
+                    .ThenInclude(x => x.Ingrediente)
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             if (receta == null)
             {
@@ -124,7 +128,6 @@ namespace Web.Controllers
             }
             return View(receta);
         }
-
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -142,7 +145,6 @@ namespace Web.Controllers
             return View(receta);
         }
 
-
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -156,6 +158,53 @@ namespace Web.Controllers
         private bool RecetaExists(int id)
         {
             return _context.Recetas.Any(e => e.Id == id);
+        }
+        private bool IngredienteExists(int id)
+        {
+            return _context.Ingredientes.Any(e => e.Id == id);
+        }
+
+        [HttpPost, ActionName("Puntaje")]
+        public async Task<IActionResult> Index(int recetaId, int puntaje)
+        {
+            var dbReceta = await _context.Recetas
+            .AsNoTracking()
+            .FirstOrDefaultAsync(u => u.Id == recetaId);
+
+            if (dbReceta is null)
+                return BadRequest();
+
+            dbReceta.Puntaje = puntaje;
+
+            _context.Update(dbReceta);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpPost, ActionName("AgregarIngredienteReceta")]
+        public async Task<IActionResult> Index(int recetaId, int ingredienteId, string cantidad)
+        {
+            if (!RecetaExists(recetaId) || !IngredienteExists(ingredienteId))
+                return BadRequest();
+
+            var dbIngredienteReceta = await _context.IngredientesRecetas
+                .AsNoTracking()
+                .FirstOrDefaultAsync(u => u.RecetaId == recetaId && u.IngredienteId == ingredienteId);
+
+            if (dbIngredienteReceta is null)
+            {
+                _context.IngredientesRecetas.Add(new IngredienteReceta() { Cantidad = cantidad, IngredienteId = ingredienteId, RecetaId = recetaId });
+            }
+            else
+            {
+                dbIngredienteReceta.Cantidad = cantidad;
+                _context.IngredientesRecetas.Update(dbIngredienteReceta);
+            }
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Web.Models
 
         public List<IngredienteReceta> Ingredientes { get; set; }= new List<IngredienteReceta>();
 
-        public string Usuario { get; set; } = String.Empty;
+        public string Usuario { get; set; } = string.Empty;
 
         [Required]
         [DisplayAttribute(Name = "Fecha de Creación")]

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Web.Models.Ingrediente>
+
+@{
+    ViewData["Title"] = "Lista de ingredientes";
+    ViewData["Subtitle"] = "Administre los ingredientes que forman parte de las recetas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="listTitle">
+    <div>
+        <h1>@ViewBag.Title</h1>
+        <h6 class="text-secondary">@ViewBag.Subtitle</h6>
+    </div>
+    <div>
+        <a class="btn btn-primary shadow-sm" asp-action="Create">Nuevo</a>
+    </div>
+</div>
+
+
+<table class="shadow-sm">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td class="text-end">
+                <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pen"></i></a>
+                <a class="btn btn-sm btn-outline-secondary" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i></a>
+                <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
