@@ -165,6 +165,7 @@ namespace Web.Controllers
         }
 
         [HttpPost, ActionName("Puntaje")]
+        [AllowAnonymous]
         public async Task<IActionResult> Index(int recetaId, int puntaje)
         {
             var dbReceta = await _context.Recetas
