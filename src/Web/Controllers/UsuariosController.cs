@@ -78,6 +78,7 @@ namespace Web.Controllers
                 return NotFound();
             }
 
+            //Convierto Enum a lista de strings
             ViewData["Perfiles"] = new SelectList(Enum.GetValues(typeof(PerfilesUsuario)));
             return View(usuario);
         }
