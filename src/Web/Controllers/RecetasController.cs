@@ -22,7 +22,7 @@ namespace Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Recetas.ToListAsync());
+            return View(await _context.Recetas.OrderBy(x => x.Nombre).ToListAsync());
         }
 
         public async Task<IActionResult> Details(int? id)
