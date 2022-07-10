@@ -19,7 +19,7 @@ namespace Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Ingredientes.OrderBy(x => x.Descripcion).ToListAsync());
+            return View(await _context.Ingredientes.OrderBy(x => x.Descripcion.ToUpper()).ToListAsync());
         }
 
         public async Task<IActionResult> Details(int? id)

@@ -21,7 +21,7 @@ namespace Web.Controllers
 
         public IActionResult Index()
         {
-            ViewData["Ingredientes"] = new SelectList(_context.Ingredientes.OrderBy(x => x.Descripcion), "Id", "Descripcion");
+            ViewData["Ingredientes"] = new SelectList(_context.Ingredientes.OrderBy(x => x.Descripcion.ToUpper()), "Id", "Descripcion");
             return View(new List<Receta>());
         }
 
@@ -36,7 +36,7 @@ namespace Web.Controllers
             
             var recetas = new List<Receta>();
             ingRec.ForEach(x => recetas.Add(x.Receta));
-            ViewData["Ingredientes"] = new SelectList(_context.Ingredientes.OrderBy(x => x.Descripcion), "Id", "Descripcion"); 
+            ViewData["Ingredientes"] = new SelectList(_context.Ingredientes.OrderBy(x => x.Descripcion.ToUpper()), "Id", "Descripcion"); 
             return View(recetas.Distinct());
            
         }
