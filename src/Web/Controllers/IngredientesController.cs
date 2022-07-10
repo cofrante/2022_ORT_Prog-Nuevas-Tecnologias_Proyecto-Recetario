@@ -115,6 +115,8 @@ namespace Web.Controllers
 
         public async Task<IActionResult> Delete(int? id)
         {
+            ViewBag.error = false;
+            
             if (id == null)
             {
                 return NotFound();
@@ -135,8 +137,25 @@ namespace Web.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var ingrediente = await _context.Ingredientes.FindAsync(id);
-            _context.Ingredientes.Remove(ingrediente);
-            await _context.SaveChangesAsync();
+                        
+            var receta = _context.IngredientesRecetas.Any(x => x.IngredienteId == id);
+            var recetas = _context.IngredientesRecetas
+                .Include(x => x.Receta)
+                .Where(x => x.IngredienteId == id).ToList();
+
+            if (receta) {
+                ViewBag.error = true;
+                ViewBag.mensajeError = "No se pudo eliminar porque esta asociado a recetas: ";
+                foreach (var rec in recetas) {
+                    ViewBag.mensajeError += "<br/>"+"- " + rec.Receta.Nombre;
+                }
+                return View(ingrediente);
+            }
+            else {
+                _context.Ingredientes.Remove(ingrediente);
+                await _context.SaveChangesAsync();
+            } 
+
             return RedirectToAction(nameof(Index));
         }
 

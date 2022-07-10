@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Detalles";
     ViewData["Subtitle"] = "¿Está seguro que desea eliminar?";
+    bool error = @ViewBag.error;
+    string mensajeError = @ViewBag.mensajeError;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -29,4 +31,14 @@
             @Html.DisplayFor(model => model.Descripcion)
         </dd>
     </dl>
+</div>
+
+<div>
+    @if (error)
+    {
+        <div>
+           @* <h4 style="color:red">@mensajeError</h4>*@
+            <h4 style="color:red">@Html.Raw(mensajeError)</h4>
+        </div>
+    }
 </div>
