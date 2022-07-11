@@ -25,5 +25,9 @@ namespace Web.Models
         [Range(0,5)]
         public int Puntaje { get; set; } = 0;
 
+        [Range(0, 5)]
+        [DisplayAttribute(Name = "Promedio")]
+        public Decimal? PuntajePromedio { get; set; } = 0;
+
     }
 }

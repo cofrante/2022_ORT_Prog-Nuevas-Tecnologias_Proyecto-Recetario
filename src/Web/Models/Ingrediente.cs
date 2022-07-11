@@ -9,5 +9,7 @@ namespace Web.Models
         public string Descripcion { get; set; }
 
         public List<IngredienteReceta> Recetas { get; set; } = new List<IngredienteReceta>();
+
+        public int? Contador { get; set; }
     }
 }

@@ -177,10 +177,19 @@ namespace Web.Controllers
 
             dbReceta.Puntaje = puntaje;
 
+            if (dbReceta.PuntajePromedio == null)
+            {
+                dbReceta.PuntajePromedio = puntaje;
+            }
+            else
+            {
+                dbReceta.PuntajePromedio = (dbReceta.PuntajePromedio + puntaje) / 2;
+            }
+
             _context.Update(dbReceta);
             await _context.SaveChangesAsync();
 
-            return Ok();
+            return Ok(Convert.ToInt32(dbReceta.PuntajePromedio));
         }
 
         [HttpPost, ActionName("AgregarIngredienteReceta")]

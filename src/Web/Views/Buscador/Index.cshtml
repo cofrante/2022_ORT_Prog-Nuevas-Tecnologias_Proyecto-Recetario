@@ -41,6 +41,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Puntaje)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PuntajePromedio)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -57,6 +60,9 @@
                     <div class="ui large star rating" data-id="@item.Id" data-rating="@item.Puntaje" data-max-rating="5"></div>
                 </td>
                 <td>
+                    <div id="rPromedio@(item.Id)" class="ui large star rating" data-id="@item.Id" data-rating="@Convert.ToInt32(item.PuntajePromedio ?? item.Puntaje)" data-max-rating="5" style="pointer-events:none;"></div>
+                </td>
+                <td>
                     <a class="btn btn-outline-secondary" asp-controller="Recetas" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i></a>
                 </td>
             </tr>
@@ -68,14 +74,22 @@
 @section Scripts {
     <script>
         $('.ui.rating').rating('setting', 'onRate', function(value) {
+            let vRecetaId = $(this).data('id');
+
             var request = { 
-                recetaId: $(this).data('id'),
+                recetaId: vRecetaId,
                 puntaje: value,
             }
 
             $.post("/Recetas/Puntaje", request, function (data) {})
-                .done(function () {
-                    location.reload();
+                .done(function (data) {
+                    $("#rPromedio" + vRecetaId).find("i").each(function(index) {
+                        if (index < data){
+                            $(this).addClass("active");
+                        }else{
+                            $(this).removeClass("active");
+                        }
+                    });
                 })
                 .fail(function () {
                     alert("error");
